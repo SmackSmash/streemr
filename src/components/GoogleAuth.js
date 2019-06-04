@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux';
+
+import { addToArray } from '../actions';
+
 class GoogleAuth extends Component {
   state = {
     isSignedIn: null
@@ -57,9 +61,26 @@ class GoogleAuth extends Component {
     }
   }
 
+  addOne = () => {
+    this.props.addToArray();
+    console.log(this.props);
+  };
+
   render() {
-    return this.renderAuthButton();
+    return (
+      <>
+        <button onClick={this.addOne}>Add One</button>
+        {this.renderAuthButton()}
+      </>
+    );
   }
 }
 
-export default GoogleAuth;
+const mapStateToProps = state => {
+  return { numbers: state.array };
+};
+
+export default connect(
+  mapStateToProps,
+  { addToArray }
+)(GoogleAuth);

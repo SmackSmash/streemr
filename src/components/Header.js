@@ -19,8 +19,8 @@ const Header = props => {
         <Link to="/streams/edit" className="item">
           Edit
         </Link>
-        <Link to="/streams/create" className="item">
-          Create
+        <Link to="/streams/new" className="item">
+          New
         </Link>
         <Link to="/streams/delete" className="item">
           Delete

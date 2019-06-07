@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { createStream } from '../actions';
 
 class StreamCreate extends Component {
+  state = {
+    redirect: false
+  };
+
   renderError({ invalid, touched, submitFailed, error }) {
     return (
       invalid &&
@@ -30,9 +35,13 @@ class StreamCreate extends Component {
 
   onSubmit = formValues => {
     this.props.createStream(formValues);
+    this.setState({ redirect: true });
   };
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/" />;
+    }
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form error">
         <Field name="title" component={this.renderInput} label="Enter Title" />
